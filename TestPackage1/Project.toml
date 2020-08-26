@@ -1,0 +1,7 @@
+name = "TestPackage1"
+uuid = "3ad4c535-f028-4e54-87ca-f800d1eb169a"
+authors = ["YLefol <yohan.lefol@gmail.com>"]
+version = "0.1.0"
+
+[deps]
+SpecialFunctions = "276daf66-3868-5448-9aa4-cd146d93841b"
