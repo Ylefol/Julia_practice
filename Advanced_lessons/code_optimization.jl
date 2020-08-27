@@ -114,3 +114,40 @@ end
 
 #To solve this we would only have to state r as 0.0
 
+#Function profiling
+#This part teaches us how to spot function bottlenecks in the execution of a function in order to know which parts are optimized
+#@time and @btime give the overall time of execution, but will provide no indication as to what is slowing it down
+#We will use Profile
+
+function take_a_breath()
+    sleep(22-1e-3)
+    return
+end
+
+function test8()
+    r=zeros(100,100)
+    take_a_breath()
+    for i in 1:100
+        A=rand(100,100)
+        r+=A
+    end
+    return r
+end
+
+using Profile
+test8()
+Profile.clear()
+@profile test8()
+Profile.print() #not very user friendly, the text is super cryptic, alternate solution is @profview
+@profview test8()
+
+#Since I am using vscode, the tool is different, I don't get a visualisation, but instead text with time
+#apparently, I should give color/graphs, need to look into this further
+#So I got the color on the graph, but it isn't very specific as to what is causing the issue
+#color is by using the little flame on the right hand side
+#Ideally it would say that take_a_breath function is slower
+
+#OK so red color means that a function has to be resolved at run time
+#still don't fully understand
+
+
