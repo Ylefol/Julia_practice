@@ -151,3 +151,60 @@ Profile.print() #not very user friendly, the text is super cryptic, alternate so
 #still don't fully understand
 
 
+
+
+#Moving on from profiling
+#Using inbound function
+
+#when using for loops we often create them to not have out of bounds error
+#If we are sure that the loop will work well (and it always should) we can use
+#@inbound to remove the boundary check.
+
+using BenchmarkTools
+arr1=zeros(10000)
+
+function put1!(arr)
+    for i in 1:length(arr)
+        arr[i]=1.0
+    end
+end
+
+function put1_inbounds!(arr)
+    @inbounds for i in 1:length(arr)
+        arr[i]=1.0
+    end
+end
+
+@btime put1!(arr1)
+
+@btime put1_inbounds!(arr1)
+
+
+
+
+#Static arrays
+#Basically, if the dimension of an array is static (never changing)
+#we can use this to our advantage. Sadly in the field of genomics this is rarely the case due to filtering
+
+#Gonna skip this one, it is essentially useless for my purposes.
+
+#So matrices work somewhat differently in Julia than in python
+#In pyhton matrices are row first, in julia they are column first
+
+arr1 = zeros(100,200)
+
+@btime for i in 1:100
+    for j in 1:200
+        arr1[i,j]=1
+    end
+end
+
+@btime for j in 1:200
+    for i in 1:100
+        arr1[i,j]=1
+    end
+end
+
+
+
+
