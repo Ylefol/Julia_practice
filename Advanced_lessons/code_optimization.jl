@@ -150,6 +150,9 @@ Profile.print() #not very user friendly, the text is super cryptic, alternate so
 #OK so red color means that a function has to be resolved at run time
 #still don't fully understand
 
+#Understand profile view
+
+
 
 
 
